@@ -10,12 +10,12 @@
 
 import Foundation
 
-class EmojiMemoryGame {
+class EmojiMemoryGame : ObservableObject {
     
     // This is a reference to the model.
     // It might be better to call this game, or simulation
     
-    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     static func createMemoryGame() -> MemoryGame<String> {
         let emojis: Array<String> = ["👻","🎃","🕷"]
@@ -32,6 +32,7 @@ class EmojiMemoryGame {
     // MARK: - Intents
     
     func choose(card: MemoryGame<String>.Card) {
+        objectWillChange.send()
         model.choose(card: card)
     }
 }

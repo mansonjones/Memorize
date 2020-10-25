@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Manson Jones on 10/22/20.
@@ -10,10 +10,10 @@ import SwiftUI
 // A ContentView functions like a View
 // This is not object oriented programming
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     // Note that because the viewModel is a class,
-    // that the following creates a pointer to the Emoji
-    var viewModel: EmojiMemoryGame
+    // that the following creates a pointer to the EmojiMemoryGame
+    @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
         HStack {
@@ -50,6 +50,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
