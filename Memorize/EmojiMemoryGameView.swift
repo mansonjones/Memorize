@@ -37,25 +37,19 @@ struct CardView: View {
         }
     }
     
+    // A ViewBuilder is a list of views
+    @ViewBuilder
     private func body(for size: CGSize) -> some View {
+        if card.isFaceUp || !card.isMatched {
         ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(lineWidth: edgeLineWidth)
-                Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(110-90), clockwise: true)
+            Pie(startAngle: Angle.degrees(-90), endAngle: Angle.degrees(110-90), clockwise: true)
                 .padding(5).opacity(0.4)
                 Text(card.content)
-            } else {
-                if !card.isMatched {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill()
-                }
+                    .font(Font.system(size: fontSize(for: size)))
             }
+        // .modifier(Cardify(isFaceUp: card.isFaceUp))
+        .cardify(isFaceUp: card.isFaceUp)
         }
-        
-        .font(Font.system(size: fontSize(for: size)))
     }
     // MARK: - Drawing Constants
     
