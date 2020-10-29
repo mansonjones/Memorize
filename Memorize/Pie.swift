@@ -7,11 +7,23 @@
 
 import SwiftUI
 
+// Shape is Animatable by definition.
+
 struct Pie: Shape {
     var startAngle: Angle
     var endAngle: Angle
     var clockwise: Bool = false
-    
+
+    // A property observer
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(startAngle.radians, endAngle.radians)
+        }
+        set {
+            startAngle = Angle.radians(newValue.first)
+            endAngle = Angle.radians(newValue.second)
+        }
+    }
     
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
